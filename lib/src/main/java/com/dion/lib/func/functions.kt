@@ -15,6 +15,18 @@ fun <T, R> Collection<T>.fold(
     }
     return accumulator
 }
+/**
+*
+*
+*
+*/
+fun<T> Collection<T>.run(
+    action: (acc: T) -> Unit
+    ): Unit {
+    for (element: T in this) {
+        action(element)
+    }
+}
 
 /**
  * transform text.
