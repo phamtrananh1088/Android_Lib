@@ -51,7 +51,7 @@ class FuncUnitTest {
     }
 
     @Test
-    func a() {
+    fun a() {
         val stringPlus: (String, String) -> String = String::plus
         val intPlus: Int.(Int) -> Int = Int::plus
         println(stringPlus.invoke("<-","->"))
@@ -62,6 +62,12 @@ class FuncUnitTest {
         println(1.intPlus(2))
 
         assertEquals(4, 2.intPlus(2))
+    }
+
+    @Test
+    fun b() {
+        val sum: (Int, Int) -> Int = { a: Int, b: Int -> a + b }
+        val sum2 = { x: Int, y: Int -> x + y }
     }
 }
 
