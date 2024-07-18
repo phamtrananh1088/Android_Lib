@@ -49,6 +49,20 @@ class FuncUnitTest {
         val r = runTransformation("hello", 4, repeatFun)
         assertEquals("hellohellohellohello", r)
     }
+
+    @Test
+    func a() {
+        val stringPlus: (String, String) -> String = String::plus
+        val intPlus: Int.(Int) -> Int = Int::plus
+        println(stringPlus.invoke("<-","->"))
+        println(stringPlus("Hello, ", "World"))
+
+        println(intPlus.invoke(1, 2))
+        println(intPlus(1, 2))
+        println(1.intPlus(2))
+
+        assertEquals(4, 2.intPlus(2))
+    }
 }
 
 typealias Combine1 = (Int, Int) -> Int
