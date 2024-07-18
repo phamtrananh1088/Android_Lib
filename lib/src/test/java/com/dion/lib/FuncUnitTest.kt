@@ -68,6 +68,16 @@ class FuncUnitTest {
     fun b() {
         val sum: (Int, Int) -> Int = { a: Int, b: Int -> a + b }
         val sum2 = { x: Int, y: Int -> x + y }
+        
+        assertEquals(4, sum2(2,2))
+    }
+
+    @Test
+    func c() {
+        val a = listOf("John", "Peter", "Mary")
+        a.run { x: String -> print(x) }
+
+        assertEquals(4, 4) 
     }
 }
 
