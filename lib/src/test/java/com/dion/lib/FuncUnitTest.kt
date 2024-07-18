@@ -95,6 +95,14 @@ class FuncUnitTest {
         assertEquals(2, r.size)
         assertEquals(r.size, r2.size)
     }
+
+    @Test
+    fun e() {
+        val strings = listOf("convention", "equals", "linq-", "lamda")
+        val r = strings.filter { it.length == 5 }.sortedBy { it }.map { it.uppercase() }
+
+        assertEquals("LINQ-", r[2])
+        
 }
 
 typealias Combine1 = (Int, Int) -> Int
