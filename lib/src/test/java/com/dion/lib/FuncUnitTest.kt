@@ -79,6 +79,22 @@ class FuncUnitTest {
 
         assertEquals(4, 4) 
     }
+
+    @Test
+    fun d() {
+        val ints = listOf(1,-1,0, 2)
+        val r = ints.filter {
+            val shouldFilter = it > 0
+            shouldFilter
+        }
+        val r2 = ints.filter {
+            val shouldFilter = it > 0
+            return@filter shouldFilter
+        }
+
+        assertEquals(2, r.size)
+        assertEquals(r.size, r2.size)
+    }
 }
 
 typealias Combine1 = (Int, Int) -> Int
