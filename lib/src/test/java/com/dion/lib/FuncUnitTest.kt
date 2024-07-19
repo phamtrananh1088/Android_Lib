@@ -1,6 +1,7 @@
 package com.dion.lib
 
 import com.dion.lib.func.fold
+import com.dion.lib.func.run2
 import com.dion.lib.func.runTransformation
 import org.junit.Test
 
@@ -73,9 +74,9 @@ class FuncUnitTest {
     }
 
     @Test
-    func c() {
+    fun c() {
         val a = listOf("John", "Peter", "Mary")
-        a.run { x: String -> print(x) }
+        a.run2 { x: String -> print(x) }
 
         assertEquals(4, 4) 
     }
@@ -101,8 +102,8 @@ class FuncUnitTest {
         val strings = listOf("convention", "equals", "linq-", "lamda")
         val r = strings.filter { it.length == 5 }.sortedBy { it }.map { it.uppercase() }
 
-        assertEquals("LINQ-", r[2])
-        
+        assertEquals("LINQ-", r[1])
+    }
 }
 
 typealias Combine1 = (Int, Int) -> Int

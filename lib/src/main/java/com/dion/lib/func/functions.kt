@@ -16,11 +16,11 @@ fun <T, R> Collection<T>.fold(
     return accumulator
 }
 /**
-*
+* run with lambda
 *
 *
 */
-fun<T> Collection<T>.run(
+fun<T> Collection<T>.run2(
     action: (acc: T) -> Unit
     ): Unit {
     for (element: T in this) {
