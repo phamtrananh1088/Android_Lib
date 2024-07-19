@@ -137,7 +137,8 @@ class FuncUnitTest {
         a.filter { it > 0}.forEach(fun(x) {
             sum2 += x
         })
-        assertEquals(sum, sum2)
+        assertEquals(15, sum)
+        assertEquals(15, sum2)
     }
 
     @Test
@@ -168,6 +169,58 @@ class FuncUnitTest {
 
     }
 
+    @Test
+    fun k() {
+        fun hasZeros(ints: List<Int>): Boolean {
+            ints.forEach {
+                if (it == 0) return true // returns from hasZeros
+            }
+            return false
+        }
+        val r = hasZeros(listOf(1,2,3,4,5))
+        assertEquals(false, r)
+
+        fun sum(ints: List<Int>): Int {
+            var sum = 0;
+            ints.forEach {
+                sum += it
+                //return sum
+            }
+            return sum
+        }
+        assertEquals(15, sum(listOf(1,2,3,4,5)))
+
+        fun b(ints: List<Int>): Int {
+            val i = 0
+            val r = ints.filter { it > 0 }.fold(i) { acc, t ->
+                val r = acc + t
+                return@fold r
+            }
+            return r
+        }
+        val r2 = b(listOf(-1,1,2,3,4,5))
+        assertEquals(15, r2)
+    }
+
+    class Node<B> {
+        val parent: Node<B>? = null
+        private var data: T? = null
+        fun<T> body(data: T) where T: B{
+            this.data = data
+        }
+    }
+    fun<T> node(data: T, init: Node<T>.(T) -> Unit): Node<T> {
+        val node = Node<T>()
+        node.init(data)
+        return node
+    }
+    open class Car {
+
+    }
+    class BMW: Car() {
+
+    }
+    val n = node<Car>(Car()) {body()}
 }
 
 typealias Combine1 = (Int, Int) -> Int
