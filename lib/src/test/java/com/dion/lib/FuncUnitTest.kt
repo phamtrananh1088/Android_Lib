@@ -104,6 +104,70 @@ class FuncUnitTest {
 
         assertEquals("LINQ-", r[1])
     }
+
+    @Test
+    fun f() {
+        fun(x: Int, y: Int): Int = x + y
+        val a = listOf(-1, 1,2,3,4)
+        //anonymous fun
+        a.filter(fun(x) = x > 0)
+        a.filter(fun(x): Boolean {
+            return x > 0
+        })
+
+        println("return")
+        //lambda fun
+        val r = a.filter {x ->
+            x > 0
+            //return
+        }
+        print("OK")
+        assertEquals(4, r.size)
+    }
+
+    @Test
+    fun g() {
+        val a = listOf(-1, 1, 2, 3, 4, 5)
+        var sum = 0
+        var sum2 = 0
+        a.filter { it > 0 }.forEach {
+            sum += it
+        }
+
+        a.filter { it > 0}.forEach(fun(x) {
+            sum2 += x
+        })
+        assertEquals(sum, sum2)
+    }
+
+    @Test
+    fun h() {
+        val sum: Int.(Int) -> Int = { other -> plus(other) }
+        val r = sum(10, 10)
+        val sum2 = fun Int.(other: Int): Int = this + other
+        assertEquals(20, r)
+        assertEquals(20, 10.sum2(10))
+    }
+
+    @Test
+    fun i() {
+        class HTML {
+            var x: Int = 0
+            fun body(){
+                x = 10
+            }
+        }
+        fun html(init: HTML.() -> Unit): HTML {
+            val html = HTML()
+            html.init()
+            return  html
+        }
+
+        val r = html { body() }
+        assertEquals(10, r.x)
+
+    }
+
 }
 
 typealias Combine1 = (Int, Int) -> Int
