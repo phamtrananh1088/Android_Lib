@@ -202,25 +202,94 @@ class FuncUnitTest {
         assertEquals(15, r2)
     }
 
-    class Node<B> {
-        val parent: Node<B>? = null
-        private var data: T? = null
-        fun<T> body(data: T) where T: B{
-            this.data = data
+    class Node<B>(val data: B) {
+        var parent: Node<B>? = null
+        fun body(){
+            //
         }
     }
-    fun<T> node(data: T, init: Node<T>.(T) -> Unit): Node<T> {
-        val node = Node<T>()
-        node.init(data)
+    fun<T> node(data: T, init: Node<T>.() -> Unit): Node<T> {
+        val node = Node<T>(data)
+        node.init()
         return node
     }
+    fun<T,B> Node<B>.findParentOfType(clazz: Class<T>): Node<B>? {
+        var p = parent
+        while (p !=null && !clazz.isInstance(p.data)) {
+            p = p.parent
+        }
+
+        return  p as Node<B>?
+    }
+    inline fun <reified T, B> Node<B>.findParentOfType2() : Node<B>? {
+    var p = parent
+    while (p != null && p.data !is T) {
+        p = parent
+    }
+        return  p as Node<B>?
+    }
+
     open class Car {
+        var name: String = "car"
+    }
+    open class BMW: Car() {
+init {
+    name = "BMW"
+}
+    }
+
+    class BMW1: BMW() {
+init {
+    name = "BMW1"
+}
 
     }
-    class BMW: Car() {
+
+    class BMW2: BMW() {
+        init {
+            name = "BMW1"
+        }
 
     }
-    val n = node<Car>(Car()) {body()}
+
+    class MEC: Car() {
+        init {
+            name = "MEC"
+        }
+
+    }
+
+    @Test
+    fun l() {
+        val car: Car = BMW()
+        val n = node(car) {body()}
+        var bmw = BMW()
+        val m = node<Car>(bmw) { body()}
+        m.parent = n
+        val bmw1 = BMW1()
+        val p = node<Car>(bmw1) {body()}
+        p.parent = m
+        val p2 = node<Car>(bmw1) {body()}
+        p.parent = n
+        //val r = p.findParentOfType(Car::class.java)
+        val r = p.findParentOfType2<BMW, Car>()
+        r?.let {
+            assertEquals("BMW", it.data.name)
+        } ?:run {
+assert(false)
+        }
+        val r2 = p2.findParentOfType2<BMW, Car>()
+        assertEquals(null, r2)
+    }
+
+    inline fun <reified T> memberOf()  = T::class.members
+
+    @Test
+    fun m() {
+        println(memberOf<Car>().joinToString("\n"))
+        assert(true)
+    }
+
 }
 
 typealias Combine1 = (Int, Int) -> Int
