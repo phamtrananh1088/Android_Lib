@@ -41,4 +41,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(kotlin("reflect"))
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.junit.jupiter)
 }
