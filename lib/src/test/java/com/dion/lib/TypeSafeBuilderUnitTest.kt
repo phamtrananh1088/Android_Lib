@@ -1,6 +1,9 @@
 package com.dion.lib
 
 import com.dion.lib.func.TypeSafeBuilder
+import com.dion.lib.func.a.TypeSafeBuilderTwo
+import com.dion.lib.func.b.TypeSafeBuilderThree
+import com.dion.lib.func.c.TypeSafeBuilderFour
 import com.dion.lib.func.fold
 import com.dion.lib.func.run2
 import com.dion.lib.func.runTransformation
@@ -33,6 +36,24 @@ class TypeSafeBuilderUnitTest {
             }
         }
         println(h)
+    }
+
+    @Test
+    fun testTypeSafeBuilder_case3() {
+        val h = TypeSafeBuilderTwo().html
+        println(h)
+    }
+
+    @Test
+    fun testTypeSafeBuilder_case4() {
+        val h = TypeSafeBuilderThree().html
+        print(h)
+    }
+
+    @Test
+    fun testTypeSafeBuilder_case5() {
+        val html = TypeSafeBuilderFour().html
+        println(html)
     }
 
 }
