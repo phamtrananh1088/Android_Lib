@@ -4,6 +4,7 @@ import com.dion.lib.func.TypeSafeBuilder
 import com.dion.lib.func.a.TypeSafeBuilderTwo
 import com.dion.lib.func.b.TypeSafeBuilderThree
 import com.dion.lib.func.c.TypeSafeBuilderFour
+import com.dion.lib.func.d.TypeSafeBuilderFive
 import com.dion.lib.func.fold
 import com.dion.lib.func.run2
 import com.dion.lib.func.runTransformation
@@ -56,4 +57,9 @@ class TypeSafeBuilderUnitTest {
         println(html)
     }
 
+    @Test
+    fun testTypeSafeBuilder_case6() {
+        val html = TypeSafeBuilderFive().html
+        print(html)
+    }
 }
